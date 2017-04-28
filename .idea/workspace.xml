@@ -73,16 +73,15 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="122" column="35" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+            <state relative-caret-position="333">
+              <caret line="146" column="48" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
               <folding>
                 <element signature="e#920#1666#0" expanded="false" />
                 <element signature="e#1684#2436#0" expanded="false" />
                 <element signature="e#2454#3217#0" expanded="false" />
                 <element signature="e#3235#3998#0" expanded="false" />
                 <element signature="e#4016#4777#0" expanded="false" />
-                <element signature="e#5759#6466#0" expanded="false" />
-                <element signature="e#6484#7542#0" expanded="false" />
+                <element signature="e#6834#7892#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,8 +90,8 @@
       <file leaf-file-name="Inscription.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/nairolf/projetprogmobile/Inscription.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+            <state relative-caret-position="209">
+              <caret line="26" column="187" selection-start-line="26" selection-start-column="187" selection-end-line="26" selection-end-column="187" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2480,8 +2479,7 @@
             <element signature="e#2454#3217#0" expanded="false" />
             <element signature="e#3235#3998#0" expanded="false" />
             <element signature="e#4016#4777#0" expanded="false" />
-            <element signature="e#5759#6466#0" expanded="false" />
-            <element signature="e#6484#7542#0" expanded="false" />
+            <element signature="e#6834#7892#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2536,8 +2534,7 @@
             <element signature="e#2454#3217#0" expanded="false" />
             <element signature="e#3235#3998#0" expanded="false" />
             <element signature="e#4016#4777#0" expanded="false" />
-            <element signature="e#5759#6466#0" expanded="false" />
-            <element signature="e#6484#7542#0" expanded="false" />
+            <element signature="e#6834#7892#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2610,24 +2607,23 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="122" column="35" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+        <state relative-caret-position="333">
+          <caret line="146" column="48" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
           <folding>
             <element signature="e#920#1666#0" expanded="false" />
             <element signature="e#1684#2436#0" expanded="false" />
             <element signature="e#2454#3217#0" expanded="false" />
             <element signature="e#3235#3998#0" expanded="false" />
             <element signature="e#4016#4777#0" expanded="false" />
-            <element signature="e#5759#6466#0" expanded="false" />
-            <element signature="e#6484#7542#0" expanded="false" />
+            <element signature="e#6834#7892#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/nairolf/projetprogmobile/Inscription.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        <state relative-caret-position="209">
+          <caret line="26" column="187" selection-start-line="26" selection-start-column="187" selection-end-line="26" selection-end-column="187" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

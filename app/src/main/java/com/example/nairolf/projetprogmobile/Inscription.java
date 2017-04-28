@@ -18,10 +18,15 @@ public class Inscription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        Spinner dropdown = (Spinner)findViewById(R.id.Etude);
-        String[] items = new String[]{"License", "Master", "Doctorat"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+        Spinner dropdown1 = (Spinner)findViewById(R.id.Etude);
+        String[] items1 = new String[]{"License1","License2","License3","Master1","Master2", "Doctorat"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items1);
+        dropdown1.setAdapter(adapter1);
+
+        Spinner dropdown2 = (Spinner)findViewById(R.id.Section);
+        String[] items2 = new String[]{"Chimie","EEA","Informatique","Math-Info","Mathématiques","Mecnique","Physique","Sciences de la Terre","Science de la vie","Science et technologies"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        dropdown2.setAdapter(adapter2);
 
         DatePicker date = (DatePicker)findViewById(R.id.datepicker);
         date.setMaxDate(new Date().getTime());
