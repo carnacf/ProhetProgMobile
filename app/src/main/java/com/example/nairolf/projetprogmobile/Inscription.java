@@ -64,7 +64,7 @@ public class Inscription extends AppCompatActivity {
 
         EditText mail = (EditText)findViewById(R.id.MailIns);
         if(mail.getText().toString().equals("")){
-            mail.setError("Les deux mots de passe doivent être identques !");
+            mail.setError("Ce champ est obligatoire !");
         }else if(!mail.getText().toString().endsWith("@etu.umontpellier.fr")){
           mail.setError("L'adresse mail n'est pas correcte !");
         }
