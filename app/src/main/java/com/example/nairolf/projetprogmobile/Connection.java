@@ -16,11 +16,11 @@ public class Connection extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection);
 
-        EtudiantManager em = new EtudiantManager(this);
+        /*EtudiantManager em = new EtudiantManager(this);
         em.open();
-        /*em.addEtudiant(new Etudiant(666,"Azerty","test","aaa","a","a,","a","ad"));
+        em.addEtudiant(new Etudiant(666,"Azerty","test","aaa","a","a,","a","ad"));
         em.addEtudiant(new Etudiant(667,"Test","test","zzz","a","a,","a","ad"));
-        Etudiant e = em.getEtudiant(666);
+        Etudiant e = em.getEtudiant(1);
         Log.v("test affichage ",e.getNom());
         em.close();*/
     }
