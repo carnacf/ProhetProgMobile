@@ -25,6 +25,7 @@ public class Etudiant {
         this.niveau_etud=niveau;
         this.specialite=spe;
     }
+
     public Etudiant()
     {
 

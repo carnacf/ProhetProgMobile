@@ -13,6 +13,21 @@ public class Question {
     private String r4;
     private int reponse;
 
+    public Question(int id_question, String nom, String r1, String r2, String r3, String r4, int reponse) {
+        this.id_question = id_question;
+        this.nom = nom;
+        this.r1 = r1;
+        this.r2 = r2;
+        this.r3 = r3;
+        this.r4 = r4;
+        this.reponse = reponse;
+    }
+
+    public Question()
+    {
+
+    }
+
     public int getId_question() {
         return id_question;
     }

@@ -28,6 +28,11 @@ public class MySQLite extends SQLiteOpenHelper {
         // Création de la base de données
         // on exécute ici les requêtes de création des tables
         sqLiteDatabase.execSQL(EtudiantManager.CREATE_TABLE_ETUDIANT);
+        sqLiteDatabase.execSQL(CoursManager.CREATE_TABLE_COURS);
+        sqLiteDatabase.execSQL(EvaluationManager.CREATE_TABLE_EVALUATION);
+        sqLiteDatabase.execSQL(QuestionManager.CREATE_TABLE_QUESTION);
+        sqLiteDatabase.execSQL(QuestionnaireManager.CREATE_TABLE_QUESTIONNAIRE);
+        sqLiteDatabase.execSQL(EvalEtudManager.CREATE_TABLE_EVALETUD);
     }
 
     @Override

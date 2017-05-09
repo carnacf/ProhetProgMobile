@@ -8,8 +8,32 @@ public class Cours {
     private int id_cours;
     private String nom;
     private String format;
+    private String matiere;
     private String niveau_etud;
-    private String specialie;
+    private String specialite;
+
+    public Cours(int id, String nom, String format, String matiere, String niveau, String spe)
+    {
+        this.id_cours=id;
+        this.nom=nom;
+        this.format=format;
+        this.matiere=matiere;
+        this.niveau_etud=niveau;
+        this.specialite=spe;
+    }
+
+    public Cours()
+    {
+
+    }
+
+    public String getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(String matiere) {
+        this.matiere = matiere;
+    }
 
     public int getId_cours() {
         return id_cours;
@@ -43,11 +67,11 @@ public class Cours {
         this.niveau_etud = niveau_etud;
     }
 
-    public String getSpecialie() {
-        return specialie;
+    public String getSpecialite() {
+        return specialite;
     }
 
-    public void setSpecialie(String specialie) {
-        this.specialie = specialie;
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 }

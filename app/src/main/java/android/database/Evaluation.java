@@ -8,7 +8,19 @@ public class Evaluation {
     private int id_evaluation;
     private String nom;
     private String niveau_etud;
-    private String specialie;
+    private String specialite;
+
+    public Evaluation(int id_evaluation, String nom, String niveau_etud, String specialite)
+    {
+        this.id_evaluation = id_evaluation;
+        this.nom = nom;
+        this.niveau_etud = niveau_etud;
+        this.specialite = specialite;
+    }
+
+    public Evaluation() {
+
+    }
 
     public int getId_evaluation() {
         return id_evaluation;
@@ -34,11 +46,11 @@ public class Evaluation {
         this.niveau_etud = niveau_etud;
     }
 
-    public String getSpecialie() {
-        return specialie;
+    public String getSpecialite() {
+        return specialite;
     }
 
-    public void setSpecialie(String specialie) {
-        this.specialie = specialie;
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 }

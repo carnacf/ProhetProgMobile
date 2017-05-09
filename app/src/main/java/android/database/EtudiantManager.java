@@ -20,6 +20,7 @@ public class EtudiantManager {
     public static final String KEY_EMAIL_ETUDIANT = "email";
     public static final String KEY_NIVEAU_ETUDIANT = "niveau_etud";
     public static final String KEY_SPECIALITE_ETUDIANT = "specialite";
+
     public static final String CREATE_TABLE_ETUDIANT = "CREATE TABLE "+TABLE_NAME+
             "("+
             " "+KEY_ID_ETUDIANT+" INTEGER primary key,"+
@@ -119,7 +120,7 @@ public class EtudiantManager {
         return etu;
     }
 
-    public Cursor getEtudiants() {
+    public Cursor getEtudiantTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
