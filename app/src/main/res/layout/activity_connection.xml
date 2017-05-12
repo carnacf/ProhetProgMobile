@@ -6,13 +6,40 @@
     tools:context="com.example.nairolf.projetprogmobile.Connection">
 
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:gravity="center"
         android:orientation="vertical"
+        android:weightSum="1.0">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:weightSum="1.0">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:weightSum="1.0"
+        android:id="@+id/rootCo">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:weightSum="1.0">
+            <ImageView
+                android:id="@+id/ImgCo"
+                android:src="@mipmap/ic_launcher"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +48,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:weightSum="1.0">
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/EmailCo"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
@@ -58,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:text="Se connecter"
                 android:layout_width="wrap_content"
+                android:onClick="connection"
                 android:textSize="12sp"/>
         </LinearLayout>
         <LinearLayout
@@ -74,7 +102,8 @@
                 android:onClick="ouvrirIns"
                 android:textSize="12sp"/>
         </LinearLayout>
-
+    </LinearLayout>
+    </ScrollView>
     </LinearLayout>
 
 

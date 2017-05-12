@@ -96,7 +96,7 @@
                     android:orientation="horizontal"
                     android:weightSum="1.0">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/MailIns"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"

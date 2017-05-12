@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by samuel on 03/05/17.
@@ -109,6 +111,46 @@ public class CoursManager {
         }
         return cours;
     }
+
+    public Cours getCours(String matiere,String niveau,String spe) {
+        // Retourne le cours dont l'id est passé en paramètre
+
+        Cours cours=new Cours();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "
+                + KEY_MATIERE_COURS +"=\'"+matiere+"\' AND "
+                + KEY_NIVEAU_COURS+"=\'"+niveau+"\' AND "
+                + KEY_SPECIALITE_COURS+"=\'"+spe+"\'", null);
+        if (c.moveToFirst()) {
+            cours.setId_cours(c.getInt(c.getColumnIndex(KEY_ID_COURS)));
+            cours.setNom(c.getString(c.getColumnIndex(KEY_NOM_COURS)));
+            cours.setFormat(c.getString(c.getColumnIndex(KEY_FORMAT_COURS)));
+            cours.setMatiere(c.getString(c.getColumnIndex(KEY_MATIERE_COURS)));
+            cours.setNiveau_etud(c.getString(c.getColumnIndex(KEY_NIVEAU_COURS)));
+            cours.setSpecialite(c.getString(c.getColumnIndex(KEY_SPECIALITE_COURS)));
+            c.close();
+        } else {
+            return null;
+        }
+        return cours;
+    }
+
+    public String[] getMatieres(String niveau, String spe){
+        Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_MATIERE_COURS + " FROM " + TABLE_NAME + " WHERE "+KEY_NIVEAU_COURS + "=\'"+niveau+"\' AND "+KEY_SPECIALITE_COURS+"=\'"+spe+"\'",null);
+        String matieres[] = new String [c.getCount()];
+        int i = 0;
+        if (c.getCount() > 0){
+            c.moveToFirst();
+            do {
+                matieres[i] = c.getString(c.getColumnIndex(KEY_MATIERE_COURS));
+                i++;
+            } while (c.moveToNext());
+            c.close();
+        }
+        return matieres;
+    }
+
+
 
     public Cursor getCoursTable() {
         // sélection de tous les enregistrements de la table

@@ -120,6 +120,26 @@ public class EtudiantManager {
         return etu;
     }
 
+    public Etudiant getEtudiant(String mail,String mdp){
+        Etudiant etu=new Etudiant();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_EMAIL_ETUDIANT+"=\'"+mail +"\' AND "+KEY_MDP_ETUDIANT +"=\'"+mdp+"\'", null);
+        if (c.moveToFirst()) {
+            etu.setId_etudiant(c.getInt(c.getColumnIndex(KEY_ID_ETUDIANT)));
+            etu.setNom(c.getString(c.getColumnIndex(KEY_NOM_ETUDIANT)));
+            etu.setPrenom(c.getString(c.getColumnIndex(KEY_PRENOM_ETUDIANT)));
+            etu.setMdp(c.getString(c.getColumnIndex(KEY_MDP_ETUDIANT)));
+            etu.setDate_naisance(c.getString(c.getColumnIndex(KEY_DATE_NAISSANCE_ETUDIANT)));
+            etu.setEmail(c.getString(c.getColumnIndex(KEY_EMAIL_ETUDIANT)));
+            etu.setNiveau_etud(c.getString(c.getColumnIndex(KEY_NIVEAU_ETUDIANT)));
+            etu.setSpecialite(c.getString(c.getColumnIndex(KEY_SPECIALITE_ETUDIANT)));
+            c.close();
+        } else {
+            return null;
+        }
+        return etu;
+    }
+
     public Cursor getEtudiantTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

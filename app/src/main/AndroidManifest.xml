@@ -6,25 +6,35 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="true"
+        android:windowSoftInputMode="adjustPan"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:label="Best Learning"
+        android:supportsRtl="true">
         <activity
             android:name=".Connection"
-            android:theme="@style/AppTheme.NoActionBarLight">
+            android:theme="@style/ActivityTheme.Primary.Base.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Inscription"
-            android:theme="@style/AppTheme.NoActionBarLight"/>
+        <activity
+            android:name=".Inscription"
+            android:theme="@style/ActivityTheme.Primary.Base.Light" />
+        <activity
+            android:name=".Connected2"
+            android:label="@string/title_activity_connected2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
