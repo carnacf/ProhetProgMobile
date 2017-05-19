@@ -105,8 +105,8 @@ public class Connection extends AppCompatActivity{
             em.open();
             Etudiant e = em.getEtudiant(mail.getText().toString(),psw.getText().toString());
             if(e == null){
-                mail.setError("Mail ou mot de passe incorrecte !");
-                psw.setError("Mail ou mot de passe incorrecte !");
+                mail.setError("Mail ou mot de passe incorrect !");
+                psw.setError("Mail ou mot de passe incorrect !");
             }else{
                 SharedPreferences tmp = getBaseContext().getSharedPreferences("user", MODE_PRIVATE);
                 tmp.edit().putInt("user_id",e.getId_etudiant()).apply();

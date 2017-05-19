@@ -100,6 +100,28 @@ public class EvaluationManager {
         return evaluation;
     }
 
+    public Evaluation[] getEvaluation(String spe,String niveau) {
+        // Retourne le evaluation dont l'id est passé en paramètre
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_SPECIALITE_EVALUATION+"=\'"+spe+
+                "\' AND "+KEY_NIVEAU_EVALUATION +"=\'"+niveau+"\'", null);
+        Evaluation [] evaluation=new Evaluation[c.getCount()];
+        int i = 0;
+        if (c.getCount() > 0){
+            c.moveToFirst();
+            do {
+                Evaluation tmp = new Evaluation(c.getInt(c.getColumnIndex(KEY_ID_EVALUATION)),
+                        c.getString(c.getColumnIndex(KEY_NOM_EVALUATION)),
+                        c.getString(c.getColumnIndex(KEY_NIVEAU_EVALUATION)),
+                        c.getString(c.getColumnIndex(KEY_SPECIALITE_EVALUATION)));
+                evaluation[i] = tmp;
+                i++;
+            } while (c.moveToNext());
+            c.close();
+        }
+        return evaluation;
+    }
+
     public Cursor getEvaluationTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

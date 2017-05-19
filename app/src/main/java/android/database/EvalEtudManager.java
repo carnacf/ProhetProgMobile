@@ -105,6 +105,29 @@ public class EvalEtudManager {
         return evalEtud;
     }
 
+    public EvalEtud getEvalEtud(int eval,int etud) {
+        // Retourne le evalEtud dont l'id est passé en paramètre
+
+
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_ID_EVALUATION_EVALETUD+"="+eval+
+                " AND "+ KEY_ID_ETUDIANT_EVALETUD +"="+etud, null);
+
+        EvalEtud  evalEtud=new EvalEtud();
+        if (c.moveToFirst()){
+            c.moveToFirst();
+            evalEtud = new EvalEtud(c.getInt(c.getColumnIndex(KEY_ID_EVALETUD)),
+                        c.getInt(c.getColumnIndex(KEY_ID_EVALUATION_EVALETUD)),
+                        c.getInt(c.getColumnIndex(KEY_ID_ETUDIANT_EVALETUD)),
+                        c.getInt(c.getColumnIndex(KEY_EVAL_PASSE_EVALETUD)),
+                        c.getInt(c.getColumnIndex(KEY_NOTE_EVALETUD)));
+            c.close();
+        }else {
+            return null;
+        }
+        return evalEtud;
+    }
+
     public Cursor getEvalEtudTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

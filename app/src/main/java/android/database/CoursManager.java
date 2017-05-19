@@ -112,7 +112,7 @@ public class CoursManager {
         return cours;
     }
 
-    public Cours getCours(String matiere,String niveau,String spe) {
+    public Cours getCour(String matiere,String niveau,String spe) {
         // Retourne le cours dont l'id est passé en paramètre
 
         Cours cours=new Cours();
@@ -131,6 +131,54 @@ public class CoursManager {
             c.close();
         } else {
             return null;
+        }
+        return cours;
+    }
+
+    public Cours getCour(String matiere,String niveau,String spe,String nomCour) {
+        // Retourne le cours dont l'id est passé en paramètre
+
+        Cours cours=new Cours();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "
+                + KEY_MATIERE_COURS +"=\'"+matiere+"\' AND "
+                + KEY_NIVEAU_COURS+"=\'"+niveau+"\' AND "
+                + KEY_SPECIALITE_COURS+"=\'"+spe+"\' AND "
+                +KEY_NOM_COURS+"=\'"+nomCour+"\'", null);
+        if (c.moveToFirst()) {
+            cours.setId_cours(c.getInt(c.getColumnIndex(KEY_ID_COURS)));
+            cours.setNom(c.getString(c.getColumnIndex(KEY_NOM_COURS)));
+            cours.setFormat(c.getString(c.getColumnIndex(KEY_FORMAT_COURS)));
+            cours.setMatiere(c.getString(c.getColumnIndex(KEY_MATIERE_COURS)));
+            cours.setNiveau_etud(c.getString(c.getColumnIndex(KEY_NIVEAU_COURS)));
+            cours.setSpecialite(c.getString(c.getColumnIndex(KEY_SPECIALITE_COURS)));
+            c.close();
+        } else {
+            return null;
+        }
+        return cours;
+    }
+
+    public Cours[] getCours(String matiere,String niveau,String spe) {
+        // Retourne le cours dont l'id est passé en paramètre
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "
+                + KEY_MATIERE_COURS +"=\'"+matiere+"\' AND "
+                + KEY_NIVEAU_COURS+"=\'"+niveau+"\' AND "
+                + KEY_SPECIALITE_COURS+"=\'"+spe+"\'", null);
+
+        Cours []cours=new Cours[c.getCount()];
+        int i = 0;
+        if (c.getCount() > 0){
+            c.moveToFirst();
+            do {
+                Cours tmp = new Cours(c.getInt(c.getColumnIndex(KEY_ID_COURS)),c.getString(c.getColumnIndex(KEY_NOM_COURS)),
+                        c.getString(c.getColumnIndex(KEY_FORMAT_COURS)),c.getString(c.getColumnIndex(KEY_MATIERE_COURS)),
+                        c.getString(c.getColumnIndex(KEY_NIVEAU_COURS)),c.getString(c.getColumnIndex(KEY_SPECIALITE_COURS)));
+                cours[i] = tmp;
+                i++;
+            } while (c.moveToNext());
+            c.close();
         }
         return cours;
     }

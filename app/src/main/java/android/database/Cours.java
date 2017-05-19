@@ -22,6 +22,18 @@ public class Cours {
         this.specialite=spe;
     }
 
+    @Override
+    public String toString() {
+        return "Cours{" +
+                "id_cours=" + id_cours +
+                ", nom='" + nom + '\'' +
+                ", format='" + format + '\'' +
+                ", matiere='" + matiere + '\'' +
+                ", niveau_etud='" + niveau_etud + '\'' +
+                ", specialite='" + specialite + '\'' +
+                '}';
+    }
+
     public Cours()
     {
 

@@ -1,14 +1,18 @@
 package com.example.nairolf.projetprogmobile;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cours;
 import android.database.CoursManager;
 import android.database.Etudiant;
 import android.database.EtudiantManager;
+import android.database.Evaluation;
+import android.database.EvaluationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.GridView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Connected2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -74,6 +79,8 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
 
         Menu m = navigationView.getMenu();
 
+
+
         String path = e.getNiveau_etud() + "/" + e.getSpecialite();
         String [] list;
         CoursManager cm = new CoursManager(this);
@@ -83,29 +90,31 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
             String cur;
             SharedPreferences current = getBaseContext().getSharedPreferences("current", MODE_PRIVATE);
             cur = current.getString("current","");
+            SubMenu sub = m.addSubMenu("Mes cours");
             boolean t = false;
             for(String str:list){
-                m.add(str);
+                sub.add(str);
                 if(str.equals(cur) && !t){
-
                     path+="/"+str;
-                    Log.v("test",path);
                     t = true;
                 }
 
             }
+            SubMenu subm = m.addSubMenu("");
+            subm.add("Liste des questionnaires");
+            subm.add("Se deconnecter");
             if(!t){
                 path += "/"+list[0];
                 cur = list[0];
             }
-            Log.v("test",path);
             for(String str: getAssets().list(path)){
-                Log.v("test",str);
-                if(cm.getCours(cur,e.getNiveau_etud(),e.getSpecialite()) == null){
-                    cm.addCours(new Cours(0,str.split("\\.")[0],str.split("\\.")[1],cur,e.getNiveau_etud(),e.getSpecialite()));
+                if(cm.getCour(cur,e.getNiveau_etud(),e.getSpecialite(),str.split("\\.")[0]) == null){
+                    Cours c = new Cours(0,str.split("\\.")[0],str.split("\\.")[1],cur,e.getNiveau_etud(),e.getSpecialite());
+                    cm.addCours(c);
+                    Log.v("test",c.toString());
                 }
             }
-            GridCoursAdapter gca = new GridCoursAdapter(this,getAssets().list(path));
+            GridCoursAdapter gca = new GridCoursAdapter(this,path,cm.getCours(cur,e.getNiveau_etud(),e.getSpecialite()));
             gv.setAdapter(gca);
             setTitle(cur);
         }catch (IOException e1) {
@@ -133,19 +142,37 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        if(item.getTitle().toString().equals("Se deconnecter")){
+            SharedPreferences tmp = getBaseContext().getSharedPreferences("user", MODE_PRIVATE);
+            tmp.edit().putInt("user_id",-1).apply();
+            Intent intent = new Intent(this,Connection.class);
+            startActivity(intent);
+        }else if(item.getTitle().toString().equals("Liste de questionnaires")){
+            EvaluationManager em = new EvaluationManager(this);
+            em.open();
+            Evaluation evals[] = em.getEvaluation(e.getSpecialite(),e.getNiveau_etud());
+            GridQuestionAdapter gqa = new GridQuestionAdapter(this,evals,e);
+            gv.setAdapter(gqa);
+            SharedPreferences current = getBaseContext().getSharedPreferences("current", MODE_PRIVATE);
+            current.edit().putString("current",item.getTitle().toString()).apply();
+            setTitle(item.getTitle());
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
         String path = e.getNiveau_etud() + "/" + e.getSpecialite()+"/"+item.getTitle();
         CoursManager cm = new CoursManager(this);
         cm.open();
         SharedPreferences current = getBaseContext().getSharedPreferences("current", MODE_PRIVATE);
         current.edit().putString("current",item.getTitle().toString()).apply();
-
         try {
             for(String str: getAssets().list(path)){
-                if(cm.getCours(item.getTitle().toString(),e.getNiveau_etud(),e.getSpecialite()) == null){
-                    cm.addCours(new Cours(0,str.split("\\.")[0],str.split("\\.")[1],item.getTitle().toString(),e.getNiveau_etud(),e.getSpecialite()));
+                if(cm.getCour(item.getTitle().toString(),e.getNiveau_etud(),e.getSpecialite(),str.split("\\.")[0]) == null){
+                    Cours c = new Cours(0,str.split("\\.")[0],str.split("\\.")[1],item.getTitle().toString(),e.getNiveau_etud(),e.getSpecialite());
+                    cm.addCours(c);
                 }
             }
-            GridCoursAdapter gca = new GridCoursAdapter(this,getAssets().list(path));
+            GridCoursAdapter gca = new GridCoursAdapter(this,path,cm.getCours(item.getTitle().toString(),e.getNiveau_etud(),e.getSpecialite()));
             gv.setAdapter(gca);
             setTitle(item.getTitle());
         }catch (IOException e1) {
