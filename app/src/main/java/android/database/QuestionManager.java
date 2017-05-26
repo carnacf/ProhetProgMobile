@@ -115,6 +115,27 @@ public class QuestionManager {
         return question;
     }
 
+    public Question getQuestion(String name) {
+        // Retourne le question dont l'id est passé en paramètre
+
+        Question question=new Question();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_NOM_QUESTION+"=\'"+name+"\'", null);
+        if (c.moveToFirst()) {
+            question.setId_question(c.getInt(c.getColumnIndex(KEY_ID_QUESTION)));
+            question.setNom(c.getString(c.getColumnIndex(KEY_NOM_QUESTION)));
+            question.setR1(c.getString(c.getColumnIndex(KEY_R1_QUESTION)));
+            question.setR2(c.getString(c.getColumnIndex(KEY_R2_QUESTION)));
+            question.setR3(c.getString(c.getColumnIndex(KEY_R3_QUESTION)));
+            question.setR4(c.getString(c.getColumnIndex(KEY_R4_QUESTION)));
+            question.setReponse(c.getInt(c.getColumnIndex(KEY_REPONSE_QUESTION)));
+            c.close();
+        } else {
+            return null;
+        }
+        return question;
+    }
+
     public Cursor getQuestionTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

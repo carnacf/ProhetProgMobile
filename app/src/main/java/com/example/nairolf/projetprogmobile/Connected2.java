@@ -2,6 +2,7 @@ package com.example.nairolf.projetprogmobile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cours;
 import android.database.CoursManager;
 import android.database.Etudiant;
@@ -39,7 +40,7 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         sp = getBaseContext().getSharedPreferences("mode", MODE_PRIVATE);
         String s = sp.getString("mode","test");
         if (s == "dark") {
@@ -103,29 +104,35 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
             SubMenu subm = m.addSubMenu("");
             subm.add("Liste des questionnaires");
             subm.add("Se deconnecter");
-            if(!t){
-                path += "/"+list[0];
-                cur = list[0];
-            }
-            for(String str: getAssets().list(path)){
-                if(cm.getCour(cur,e.getNiveau_etud(),e.getSpecialite(),str.split("\\.")[0]) == null){
-                    Cours c = new Cours(0,str.split("\\.")[0],str.split("\\.")[1],cur,e.getNiveau_etud(),e.getSpecialite());
-                    cm.addCours(c);
-                    Log.v("test",c.toString());
+            if(!cur.equals("Liste des questionnaires")) {
+                if (!t) {
+                    path += "/" + list[0];
+                    cur = list[0];
+                }
+                for (String str : getAssets().list(path)) {
+                    if (cm.getCour(cur, e.getNiveau_etud(), e.getSpecialite(), str.split("\\.")[0]) == null) {
+                        Cours c = new Cours(0, str.split("\\.")[0], str.split("\\.")[1], cur, e.getNiveau_etud(), e.getSpecialite());
+                        cm.addCours(c);
+                    }
                 }
             }
-            GridCoursAdapter gca = new GridCoursAdapter(this,path,cm.getCours(cur,e.getNiveau_etud(),e.getSpecialite()));
-            gv.setAdapter(gca);
+            if(!cur.equals("Liste des questionnaires")){
+                GridCoursAdapter gca = new GridCoursAdapter(this,path,cm.getCours(cur,e.getNiveau_etud(),e.getSpecialite()));
+                gv.setAdapter(gca);
+            }else{
+                EvaluationManager evm = new EvaluationManager(this);
+                evm.open();
+                Evaluation evals[] = evm.getEvaluation(e.getSpecialite(),e.getNiveau_etud());
+                GridQuestionAdapter gqa = new GridQuestionAdapter(this,evals,e);
+                gv.setAdapter(gqa);
+            }
+
             setTitle(cur);
         }catch (IOException e1) {
             e1.printStackTrace();
         }
 
-
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
     }
 
     @Override
@@ -136,8 +143,6 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
         }
     }
 
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -147,10 +152,11 @@ public class Connected2 extends AppCompatActivity implements NavigationView.OnNa
             tmp.edit().putInt("user_id",-1).apply();
             Intent intent = new Intent(this,Connection.class);
             startActivity(intent);
-        }else if(item.getTitle().toString().equals("Liste de questionnaires")){
+        }else if(item.getTitle().toString().equals("Liste des questionnaires")){
             EvaluationManager em = new EvaluationManager(this);
             em.open();
             Evaluation evals[] = em.getEvaluation(e.getSpecialite(),e.getNiveau_etud());
+            Log.v("evaluationbs : ","eval "+evals.length);
             GridQuestionAdapter gqa = new GridQuestionAdapter(this,evals,e);
             gv.setAdapter(gqa);
             SharedPreferences current = getBaseContext().getSharedPreferences("current", MODE_PRIVATE);

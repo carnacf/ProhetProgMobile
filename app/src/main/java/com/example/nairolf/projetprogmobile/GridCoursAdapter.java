@@ -36,7 +36,6 @@ public class GridCoursAdapter extends BaseAdapter {
         context = c;
         path = _path;
         listCours = cours;
-        Log.v("test",listCours.length+"");
     }
 
     @Override
@@ -69,6 +68,7 @@ public class GridCoursAdapter extends BaseAdapter {
         }else{
             img.setImageResource(R.mipmap.ic_img);
         }
+        final String form = listCours[position].getFormat();
         root.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 AssetManager assetManager = context.getAssets();
@@ -95,7 +95,7 @@ public class GridCoursAdapter extends BaseAdapter {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(
                         Uri.parse("file://" + context.getFilesDir() +"/"+s),
-                        "application/pdf");
+                        "application/"+form);
 
                 context.startActivity(intent);
         }});

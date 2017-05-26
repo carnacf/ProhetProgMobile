@@ -9,11 +9,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <uses-feature
         android:name="android.hardware.sensor.light"
         android:required="true"
-        android:windowSoftInputMode="adjustPan"/>
+        android:windowSoftInputMode="adjustPan" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +21,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".Connection"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/ActivityTheme.Primary.Base.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,12 +30,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:name=".Inscription"
             android:theme="@style/ActivityTheme.Primary.Base.Light" />
         <activity
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:name=".Connected2"
             android:label="@string/title_activity_connected2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".QuestionActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

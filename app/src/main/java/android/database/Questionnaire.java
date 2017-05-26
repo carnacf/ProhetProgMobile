@@ -9,8 +9,9 @@ public class Questionnaire {
     private int id_evaluation;
     private int id_question;
 
-    public Questionnaire(int id_evaluation, int id_question)
+    public Questionnaire(int id_questionnaire,int id_evaluation, int id_question)
     {
+        this.id_questionnaire = id_questionnaire;
         this.id_evaluation = id_evaluation;
         this.id_question = id_question;
     }

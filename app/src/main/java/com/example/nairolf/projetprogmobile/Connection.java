@@ -2,8 +2,15 @@ package com.example.nairolf.projetprogmobile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Etudiant;
 import android.database.EtudiantManager;
+import android.database.Evaluation;
+import android.database.EvaluationManager;
+import android.database.Question;
+import android.database.QuestionManager;
+import android.database.Questionnaire;
+import android.database.QuestionnaireManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -27,6 +34,7 @@ public class Connection extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         sp = getBaseContext().getSharedPreferences("mode", MODE_PRIVATE);
         String s = sp.getString("mode","test");
         if (s == "dark") {
@@ -35,7 +43,43 @@ public class Connection extends AppCompatActivity{
             setTheme(R.style.ActivityTheme_Primary_Base_Light);
         }
 
+       /*EvaluationManager em = new EvaluationManager(this);
+        em.open();
 
+        em.addEvaluation(new Evaluation(0,"Android : Les capteurs","Master1","Informatique"));
+
+        QuestionManager qm = new QuestionManager(this);
+        qm.open();
+        qm.addQuestion(new Question(0,"Quels est le taux de rafraichissement de type SENSOR_DELAY_NORMAL ?",
+                "60 000 microsecondes","200 000 microsecondes","20 000 microsecondes","100 000 microsecondes",2));
+        qm.addQuestion(new Question(0,"Que fait le capteur gyroscope ?","Il mesure la rotation en terme de vitesse autour de chaque axe",
+                "Il mesure l’acceleration","Il mesure la distance ente l’appareil et un objet ciblé",
+                "Il mesure l’angle entre le nord magnétique",1));
+        qm.addQuestion(new Question(0,"Quels sont la ou les fonctions à implémenter pour recevoir les données d’un capteur ?",
+                "onChanged()","onSensorEvent()","onAccuracyChanged() et onSensorChanged()","onChanged() et onSensorEvent()",3));
+        qm.addQuestion(new Question(0,"Parmi ces classes, laquelle ne fait pas partie de l’API Sensor Android ?",
+                "SernsorManager","SensorUtility","SensorEvent","Sensor",2));
+        qm.addQuestion(new Question(0,"A quoi sert l’element <use-feature> dans la manifest ?",
+                "A récupérer les droits au près de l’utilisateur","A permettre l’utilisation du capteur","A sert à déclarer l’utilisation faite des capteurs",
+                "A filtrer les appareils possédant le capteur en question dans Google play",4));
+
+
+        QuestionnaireManager qsm = new QuestionnaireManager(this);
+        qsm.open();
+
+        Evaluation e = em.getEvaluation("Android : Les capteurs");
+
+        Question q1 = qm.getQuestion("Quels est le taux de rafraichissement de type SENSOR_DELAY_NORMAL ?");
+        Question q2 = qm.getQuestion("Que fait le capteur gyroscope ?");
+        Question q3 = qm.getQuestion("Quels sont la ou les fonctions à implémenter pour recevoir les données d’un capteur ?");
+        Question q4 = qm.getQuestion("Parmi ces classes, laquelle ne fait pas partie de l’API Sensor Android ?");
+        Question q5 = qm.getQuestion("A quoi sert l’element <use-feature> dans la manifest ?");
+
+        qsm.addQuestionnaire(new Questionnaire(0,e.getId_evaluation(),q1.getId_question()));
+        qsm.addQuestionnaire(new Questionnaire(0,e.getId_evaluation(),q2.getId_question()));
+        qsm.addQuestionnaire(new Questionnaire(0,e.getId_evaluation(),q3.getId_question()));
+        qsm.addQuestionnaire(new Questionnaire(0,e.getId_evaluation(),q4.getId_question()));
+        qsm.addQuestionnaire(new Questionnaire(0,e.getId_evaluation(),q5.getId_question()));*/
 
         spChanged = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override

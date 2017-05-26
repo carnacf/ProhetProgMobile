@@ -1,6 +1,8 @@
 package com.example.nairolf.projetprogmobile;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Etudiant;
 import android.database.EvalEtud;
 import android.database.EvalEtudManager;
@@ -18,9 +20,9 @@ import android.widget.TextView;
 
 public class GridQuestionAdapter extends BaseAdapter {
 
-    private Evaluation [] lstEvals;
-    private Context c;
-    private Etudiant e;
+    private final Evaluation [] lstEvals;
+    private final Context c;
+    private final Etudiant e;
 
     public GridQuestionAdapter(Context _c, Evaluation [] evals, Etudiant _e){
         c = _c;
@@ -51,9 +53,18 @@ public class GridQuestionAdapter extends BaseAdapter {
         TextView titleText2 = (TextView) root.findViewById(R.id.titleQ);
         ImageView img = (ImageView) root.findViewById(R.id.imageQ);
         titleText2.setText(lstEvals[position].getNom());
+        final int pos = position;
         if(ee == null){
-            titleText.setText("Note : Non répondu pour le moment");
+            titleText.setText("Note : Non répondu");
             img.setImageResource(R.mipmap.ic_interrogation);
+            root.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v) {
+                    SharedPreferences sp = c.getSharedPreferences("questionnaire",Context.MODE_PRIVATE);
+                    sp.edit().putInt("questionnaire",lstEvals[pos].getId_evaluation()).apply();
+                    Intent i = new Intent(c,QuestionActivity.class);
+                    c.startActivity(i);
+                }});
+
         }else{
             titleText.setText("Note : "+ee.getNote()+"/20");
             if(ee.getNote() >= 10){

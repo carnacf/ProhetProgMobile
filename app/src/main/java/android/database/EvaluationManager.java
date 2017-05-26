@@ -122,6 +122,24 @@ public class EvaluationManager {
         return evaluation;
     }
 
+    public Evaluation getEvaluation(String name) {
+        // Retourne le evaluation dont l'id est passé en paramètre
+
+        Evaluation evaluation=new Evaluation();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_NOM_EVALUATION+"=\'"+name+"\'", null);
+        if (c.moveToFirst()) {
+            evaluation.setId_evaluation(c.getInt(c.getColumnIndex(KEY_ID_EVALUATION)));
+            evaluation.setNom(c.getString(c.getColumnIndex(KEY_NOM_EVALUATION)));
+            evaluation.setNiveau_etud(c.getString(c.getColumnIndex(KEY_NIVEAU_EVALUATION)));
+            evaluation.setSpecialite(c.getString(c.getColumnIndex(KEY_SPECIALITE_EVALUATION)));
+            c.close();
+        } else {
+            return null;
+        }
+        return evaluation;
+    }
+
     public Cursor getEvaluationTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

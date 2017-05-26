@@ -95,6 +95,21 @@ public class QuestionnaireManager {
         return questionnaire;
     }
 
+    public int[] getidQuestions(int id_eval){
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_ID_EVALUATION_QUESTIONNAIRE+"="+id_eval,null);
+        int ids [] = new int[c.getCount()];
+        int i = 0;
+        if (c.getCount() > 0){
+            c.moveToFirst();
+            do {
+                ids[i] = c.getInt(c.getColumnIndex(KEY_ID_QUESTION_QUESTIONNAIRE));
+                i++;
+            } while (c.moveToNext());
+            c.close();
+        }
+        return ids;
+    }
+
     public Cursor getQuestionnaireTable() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
